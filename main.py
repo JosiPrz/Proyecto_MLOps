@@ -1,6 +1,6 @@
 from fastapi import FastAPI,status,HTTPException
 from fastapi.responses import JSONResponse
-import pandas as pd
+import numpy as np
 import joblib
 
 app = FastAPI(
@@ -16,7 +16,7 @@ model = joblib.load("model/LSTM_Model_V1.pkl")
 
 @app.post("/api/v1/predict-delivery-ETA", tags=["Delivery-ETA"])
 async def predict(
-        Delivery_person_Age: int,
+        Delivery_person_Age: float,
         Delivery_person_Ratings: float,
         distance: float
 ):
@@ -27,10 +27,10 @@ async def predict(
     }
 
     try:
-        df = pd.DataFrame(dictionary, index=[0])
+        df = np.array([[Delivery_person_Age, Delivery_person_Ratings, distance]])
         prediction = model.predict(df)
         return JSONResponse(
-            content=prediction[0],
+            content=prediction.tolist(),
             status_code=status.HTTP_200_OK
         )
 
