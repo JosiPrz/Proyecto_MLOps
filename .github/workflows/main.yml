@@ -43,7 +43,7 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         script: |
-          docker login
+          docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_PASSWORD }}'
           if docker ps --all | grep predict-delivery-eta; then
             docker stop predict-delivery-eta
             docker rm predict-delivery-eta
