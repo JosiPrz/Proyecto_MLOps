@@ -49,8 +49,8 @@ jobs:
             docker rm predict-delivery-eta
           fi 
           
-          docker pull ${{ secrets.DOCKER_USERNAME }}/predict-delivery-eta:latest
-          docker run -d --name predict-delivery-eta -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/predict-delivery-eta:latest
+          docker pull ${{ secrets.DOCKER_USERNAME }}/predict-delivery-eta:v1
+          docker run -d --name predict-delivery-eta -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/predict-delivery-eta:v1
 
 
 
