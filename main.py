@@ -1,6 +1,6 @@
 from fastapi import FastAPI,status,HTTPException
 from fastapi.responses import JSONResponse
-import numpy as np
+import pandas as pd
 import joblib
 
 app = FastAPI(
@@ -27,7 +27,7 @@ async def predict(
     }
 
     try:
-        df = np.array([[Delivery_person_Age, Delivery_person_Ratings, distance]])
+        df = pd.DataFrame(dictionary, index=[0])
         prediction = model.predict(df)
         return JSONResponse(
             content=prediction.tolist(),
